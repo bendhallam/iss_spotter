@@ -1,0 +1,22 @@
+{
+  "name": "iss_spotter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bendhallam/iss_spotter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bendhallam/iss_spotter/issues"
+  },
+  "homepage": "https://github.com/bendhallam/iss_spotter#readme",
+  "description": "",
+  "dependencies": {
+    "needle": "^3.3.1"
+  }
+}

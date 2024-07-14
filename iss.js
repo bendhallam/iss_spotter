@@ -57,7 +57,7 @@ const fetchCoordsByIP = (ip, callback) => {
 const fetchISSFlyOverTimes = (coords, callback) => {
   // fetch information using coordinates
   needle.get(`https://iss-flyover.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}`, (error, response, body) => {
-     // if there is an error, send the error to the callback with no response parameter
+    // if there is an error, send the error to the callback with no response parameter
     if (error) {
       return callback(error, null);
     }
@@ -68,8 +68,8 @@ const fetchISSFlyOverTimes = (coords, callback) => {
     // save content of url to variable and send info to callback with no error parameter
     const passes = body.response;
     return callback(null, passes);
-  })
-}
+  });
+};
 
 
 

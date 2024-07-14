@@ -30,13 +30,16 @@ const fetchCoordsByIP = (ip, callback) => {
     if (error) {
       return callback(error, null);
     }
-    if (!body.success) {
-      const message = `Success status was ${body.success}. Server message says: ${body.message} when fetching for IP ${body.ip}`;
-      callback(Error(message), null);
-      return;
+    if (response.statusCode !== 200) {
+      const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${response.body}`;
+      return callback(Error(msg), null);
     }
-    const latitude = response.body.latitude;
-    const longitude = response.body.longitude;
+    if (!body.success) {
+      const message = `Success status was ${body.success}. Server message says: ${body.message} when fetching IP ${body.ip}`;
+      return callback(Error(message), null);
+    }
+    const latitude = body.latitude;
+    const longitude = body.longitude;
     return callback(null, {latitude, longitude});
   });
 };

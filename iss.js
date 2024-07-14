@@ -63,12 +63,11 @@ const fetchISSFlyOverTimes = (coords, callback) => {
     }
     // check if there are any error codes (ie. any status code other than 200), and send an error message to the callback with no response parameter
     if (response.statusCode !== 200) {
-      callback(Error(`Status Code ${response.statusCode} when fetching ISS pass times: ${body}`), null);
-      return;
+      return callback(Error(`Status Code ${response.statusCode} when fetching ISS pass times: ${body}`), null);
     }
     // save content of url to variable and send info to callback with no error parameter
     const passes = body.response;
-    callback(null, passes);
+    return callback(null, passes);
   })
 }
 

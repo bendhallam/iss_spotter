@@ -1,16 +1,3 @@
-const needle = require('needle');
-
-/**
- * Makes a single API request to retrieve the lat/lng for a given IPv4 address.
- * Input:
- *   - The ip (ipv4) address (string)
- *   - A callback (to pass back an error or the lat/lng object)
- * Returns (via Callback):
- *   - An error, if any (nullable)
- *   - The lat and lng as an object (null if error). Example:
- *     { latitude: '49.27670', longitude: '-123.13000' }
- */
-
 const fetchMyIP = (callback) => {
   // fetch ip address
   needle.get('https://api.ipify.org?format=json/', (error, response) => {
@@ -71,6 +58,27 @@ const fetchISSFlyOverTimes = (coords, callback) => {
   });
 };
 
+const nextISSTimesForMyLocation = function(callback) {
+  // fetch ip address
+  fetchMyIP((error, ip) => {
+    // if there's an error return error to the callback 
+    if (error) {
+      return callback(error, null);
+    }
+    fetchCoordsByIP(ip, (error, loc) => {
+      if (error) {
+        return callback(error, null);
+      }
+      fetchISSFlyOverTimes(loc, (error, nextPasses) => {
+        if (error) {
+          return callback(error, null);
+        }
+        callback(null, nextPasses);
+      })
+    })
+  })
+}
 
 
-module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes };
+
+module.exports = { nextISSTimesForMyLocation };

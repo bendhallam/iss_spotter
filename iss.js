@@ -1,3 +1,5 @@
+const needle = require('needle')
+
 const fetchMyIP = (callback) => {
   // fetch ip address
   needle.get('https://api.ipify.org?format=json/', (error, response) => {
@@ -58,7 +60,7 @@ const fetchISSFlyOverTimes = (coords, callback) => {
   });
 };
 
-const nextISSTimesForMyLocation = function(callback) {
+const nextISSTimesForMyLocation = (callback) => {
   // fetch ip address
   fetchMyIP((error, ip) => {
     // if there's an error return error to the callback 
